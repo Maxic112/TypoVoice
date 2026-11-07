@@ -17,6 +17,14 @@ and inserts the recognized text into the focused field of any app. minSdk 31, ta
   `rm -rf app/build` and rebuild.
 - Android 17 requires the runtime permission `ACCESS_LOCAL_NETWORK` for servers on the local network.
 
+## Release
+- CI: `.github/workflows/build.yml` (tests, lint, debug APK on push/PR); `release.yml` runs on a `vX.Y.Z` tag:
+  builds a signed APK with versionName from the tag (versionCode = major·10000 + minor·100 + patch),
+  publishes a GitHub Release `TypoVoice-X.Y.Z.apk` with notes from the matching CHANGELOG section.
+- Signing: `SIGNING_*` environment variables (repository secrets in CI) or the git-ignored
+  `keystore.properties` (see `keystore.properties.example`); without them the release APK is unsigned.
+- To release: move the CHANGELOG "Unreleased" entry to the version with a date, commit, tag `vX.Y.Z`, push the tag.
+
 ## Architecture
 - `core/dictation/DictationController` — single owner of record → upload → deliver; entry points
   only call `start/stop/toggle/cancel`. `DictationService` is the microphone foreground service,

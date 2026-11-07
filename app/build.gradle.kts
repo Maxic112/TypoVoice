@@ -16,6 +16,24 @@ val cleanStart = providers.gradleProperty("typovoice.cleanStart").isPresent
 
 fun localProp(key: String): String = if (cleanStart) "" else localProps.getProperty(key, "")
 
+// Version: `-Ptypovoice.versionName=1.2.3` (CI passes the tag); versionCode is derived from it.
+val appVersionName = providers.gradleProperty("typovoice.versionName").getOrElse("0.1.0")
+val appVersionCode = appVersionName.substringBefore('-').split('.').map { it.toIntOrNull() ?: 0 }
+    .let { (it.getOrElse(0) { 0 } * 10_000) + (it.getOrElse(1) { 0 } * 100) + it.getOrElse(2) { 0 } }
+    .coerceAtLeast(1)
+
+// Release signing: environment variables (CI) or the git-ignored keystore.properties (local builds).
+// Without them the release APK is built unsigned.
+val keystoreProps = Properties().apply {
+    val file = rootProject.file("keystore.properties")
+    if (file.exists()) file.inputStream().use { load(it) }
+}
+
+fun signingValue(env: String, key: String): String? =
+    System.getenv(env)?.takeIf { it.isNotBlank() } ?: keystoreProps.getProperty(key)?.takeIf { it.isNotBlank() }
+
+val releaseStoreFile = signingValue("SIGNING_STORE_FILE", "storeFile")
+
 android {
     namespace = "ru.maximv.typovoice"
     compileSdk = 37
@@ -24,14 +42,25 @@ android {
         applicationId = "ru.maximv.typovoice"
         minSdk = 31
         targetSdk = 37
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
 
         // GitHub repository ("owner/name") whose releases the app updates from; set in gradle.properties.
         buildConfigField("String", "UPDATE_REPO", "\"${providers.gradleProperty("typovoice.updateRepo").getOrElse("")}\"")
         buildConfigField("String", "DEV_SERVER_NAME", "\"\"")
         buildConfigField("String", "DEV_SERVER_URL", "\"\"")
         buildConfigField("String", "DEV_SERVER_KEY", "\"\"")
+    }
+
+    signingConfigs {
+        if (releaseStoreFile != null) {
+            create("release") {
+                storeFile = rootProject.file(releaseStoreFile)
+                storePassword = signingValue("SIGNING_STORE_PASSWORD", "storePassword")
+                keyAlias = signingValue("SIGNING_KEY_ALIAS", "keyAlias")
+                keyPassword = signingValue("SIGNING_KEY_PASSWORD", "keyPassword")
+            }
+        }
     }
 
     buildTypes {
@@ -46,6 +75,7 @@ android {
         release {
             isMinifyEnabled = false
             resValue("string", "app_name", "TypoVoice")
+            signingConfigs.findByName("release")?.let { signingConfig = it }
         }
     }
 
