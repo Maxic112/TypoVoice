@@ -1,9 +1,6 @@
 package ru.maximv.typovoice.ui.settings
 
 import android.Manifest
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Text
@@ -31,9 +28,7 @@ fun PermissionsScreen(onBack: () -> Unit) {
         onPauseOrDispose { }
     }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { refresh++ }
-    val appSettings = {
-        context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${context.packageName}")))
-    }
+    val appSettings = { context.startActivity(Permissions.appDetailsIntent(context)) }
 
     // Read `refresh` so the checks re-run after returning from system settings.
     val mic = refresh.let { Permissions.hasMicrophone(context) }
@@ -62,6 +57,7 @@ fun PermissionsScreen(onBack: () -> Unit) {
             PermissionRow(str(R.string.perm_a11y), str(R.string.perm_a11y_summary), a11y) {
                 context.startActivity(Permissions.accessibilitySettingsIntent())
             }
+            if (!a11y && Permissions.isFileInstall(context)) Note(str(R.string.a11y_restricted_hint))
             Note(str(R.string.perm_note))
             TextButton(onClick = appSettings) { Text(str(R.string.perm_open_settings)) }
         }

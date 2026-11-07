@@ -53,6 +53,19 @@ start dictation with a floating button, a tile, a volume key or the system voice
 
 Requires Android 12 or newer and a running transcribe-text-server instance.
 
+### “Restricted setting” when turning on accessibility
+
+Android 13+ blocks accessibility services of apps installed from an APK file. If you see
+“Restricted setting”:
+
+1. Try to turn TypoVoice on in **Settings → Accessibility** once and close the dialog.
+2. Open **Settings → Apps → TypoVoice** (or tap “Open app settings” in TypoVoice), tap **⋮** in the top
+   right corner and choose **Allow restricted settings**; confirm with your PIN or fingerprint.
+3. Turn TypoVoice on in Accessibility again.
+
+The wording and the place of the menu can differ slightly between vendors. Google Play Protect may also warn
+about an unknown app during installation: TypoVoice is not on Google Play, so Play Protect does not know it yet.
+
 ### Permissions
 
 | Permission | Why |

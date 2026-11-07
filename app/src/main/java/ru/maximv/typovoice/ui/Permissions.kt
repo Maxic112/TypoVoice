@@ -4,7 +4,10 @@ import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import androidx.core.content.ContextCompat
 import ru.maximv.typovoice.a11y.TypoVoiceAccessibilityService
@@ -27,6 +30,21 @@ object Permissions {
     }
 
     fun accessibilitySettingsIntent() = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+
+    fun appDetailsIntent(context: Context) =
+        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${context.packageName}"))
+
+    /**
+     * Android 13+ blocks accessibility services of apps installed from an APK file (browser download, file
+     * manager) until the user taps "Allow restricted settings" in App info. Store and adb installs are not
+     * affected, so the hint is shown only for file installs.
+     */
+    fun isFileInstall(context: Context): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return false
+        val source = runCatching { context.packageManager.getInstallSourceInfo(context.packageName).packageSource }
+            .getOrNull() ?: return false
+        return source == PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE || source == PackageInstaller.PACKAGE_SOURCE_DOWNLOADED_FILE
+    }
 
     /**
      * Whether TypoVoice is the default speech recognizer; null if the system doesn't let us read it.

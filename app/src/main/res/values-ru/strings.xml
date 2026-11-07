@@ -125,6 +125,7 @@
     <string name="home_restart">Перезапустить службу</string>
     <string name="home_permissions_needed">Нужны разрешения</string>
     <string name="home_permissions_grant">Выдать микрофон, уведомления и локальную сеть</string>
+    <string name="a11y_restricted_hint">Android блокирует специальные возможности для приложений, установленных из APK-файла. Один раз попробуйте включить TypoVoice в специальных возможностях, затем откройте настройки приложения, нажмите ⋮ → «Разрешить ограниченные настройки» и включите снова.</string>
     <string name="home_enable_a11y">Включить специальные возможности</string>
     <string name="common_more">Подробнее</string>
     <string name="home_stop_recording">Остановить запись</string>

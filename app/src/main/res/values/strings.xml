@@ -125,6 +125,7 @@
     <string name="home_restart">Restart service</string>
     <string name="home_permissions_needed">Permissions needed</string>
     <string name="home_permissions_grant">Grant microphone, notifications and local network</string>
+    <string name="a11y_restricted_hint">Android blocks accessibility for apps installed from an APK file. Try to turn TypoVoice on in Accessibility once, then open App info, tap ⋮ → “Allow restricted settings” and turn it on again.</string>
     <string name="home_enable_a11y">Turn on accessibility</string>
     <string name="common_more">More</string>
     <string name="home_stop_recording">Stop recording</string>

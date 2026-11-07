@@ -282,6 +282,12 @@ private fun Warnings(navigate: (String) -> Unit) {
                 TextButton(onClick = { context.startActivity(Permissions.accessibilitySettingsIntent()) }) {
                     Text(str(R.string.home_enable_a11y))
                 }
+                if (Permissions.isFileInstall(context)) {
+                    Text(str(R.string.a11y_restricted_hint), style = MaterialTheme.typography.bodySmall)
+                    TextButton(onClick = { context.startActivity(Permissions.appDetailsIntent(context)) }) {
+                        Text(str(R.string.perm_open_settings))
+                    }
+                }
             }
             TextButton(onClick = { navigate(Routes.PERMISSIONS) }) { Text(str(R.string.common_more)) }
         }
