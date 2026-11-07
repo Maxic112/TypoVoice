@@ -1,0 +1,9 @@
+# Copy to local.properties (git-ignored) and adjust.
+# Android SDK location (Android Studio writes it for you).
+sdk.dir=/path/to/Android/sdk
+
+# Optional: a transcribe-text-server seeded into debug builds on first launch.
+# Leave empty to start with no servers. Release builds never include these values.
+typovoice.dev.name=My server
+typovoice.dev.baseUrl=https://stt.example.com
+typovoice.dev.apiKey=stt-xxxxxxxxxxxxxxxx

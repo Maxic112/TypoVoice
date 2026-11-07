@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Radial blue background of the TypoVoice icon (Figma 773:17123), on the 1536 adaptive canvas. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="1536"
+    android:viewportHeight="1536">
+    <path android:pathData="M0,0h1536v1536h-1536z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="768" android:centerY="768" android:gradientRadius="512">
+                <item android:offset="0" android:color="#FF2E00FF" />
+                <item android:offset="0.37" android:color="#FF2E00FF" />
+                <item android:offset="1" android:color="#FF2100AE" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

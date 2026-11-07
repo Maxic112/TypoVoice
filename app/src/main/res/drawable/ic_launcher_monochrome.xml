@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon layer: the tile mark (Figma 2001:2) on the 1536 adaptive canvas. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="1536"
+    android:viewportHeight="1536">
+    <group android:translateX="414.5" android:translateY="416.5">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M443.5 0C475.256 0 501 25.7436 501 57.5V190H618.5C650.256 190 676 215.744 676 247.5C676 279.256 650.256 305 618.5 305H501V537.504C501 558.052 506.606 567.371 510.466 571.749C514.779 576.641 522.272 581.34 534.801 583.664C562.738 588.847 597.022 578.803 613.691 564.913C638.088 544.584 674.345 547.882 694.674 572.278C715.003 596.675 711.705 632.933 687.309 653.262C643.478 689.784 574.262 707.947 513.824 696.734C482.165 690.861 449.252 676.21 424.206 647.804C398.707 618.883 386 580.954 386 537.504V57.5C386 25.7436 411.744 0 443.5 0Z" />
+        <path android:fillColor="#FFFFFFFF" android:fillAlpha="0.4" android:pathData="M0 422.5L0 280.5C0 248.744 25.7436 223 57.5 223C89.2564 223 115 248.744 115 280.5L115 422.5C115 454.256 89.2564 480 57.5 480C25.7436 480 0 454.256 0 422.5Z" />
+        <path android:fillColor="#FFFFFFFF" android:fillAlpha="0.7" android:pathData="M308 546.5L308 156.5C308 124.744 282.256 99 250.5 99C218.744 99 193 124.744 193 156.5L193 546.5C193 578.256 218.744 604 250.5 604C282.256 604 308 578.256 308 546.5Z" />
+    </group>
+</vector>
